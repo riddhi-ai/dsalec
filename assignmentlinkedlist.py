@@ -1,10 +1,22 @@
+"""
+Assignment1: Create a Singly Linear Linked List with following operations
+1.	Create Linked List
+2.	Traverse and print the node values
+3.	Insert node at a specific position
+4.	Find Middle node and print its value
+5.	Delete node
+6.	Reverse list
+7.	Calculate the sum of every two consecutive node values.
+"""
+
 # Node class
 class Node:
     def __init__(self, data):
         self.data = data      # store value
         self.next = None      # pointer to next node
 
-# Linked List class
+# to create a Linked List class 
+# Creates nodes one by one and connects each new node to the end of the list
 class LinkedList:
     def __init__(self):
         self.head = None      # start empty
@@ -20,7 +32,8 @@ class LinkedList:
             temp = temp.next
         temp.next = new_node
 
-    # 2. Traverse and print
+    # 2. to Traverse and print 
+    # the node values starts at head, prints each node's value, and moves using temp = temp.next
     def print_list(self):
         temp = self.head
         while temp:
@@ -28,7 +41,8 @@ class LinkedList:
             temp = temp.next
         print("None")
 
-    # 3. Insert at specific position
+    # 3. to Insert at specific position 
+    #Connects the new node to the next node then connects the previous node to the new node. Position starts at 1.
     def insert(self, data, pos):
         new_node = Node(data)
         if pos == 1:          # insert at head
@@ -42,7 +56,8 @@ class LinkedList:
         new_node.next = temp.next
         temp.next = new_node
 
-    # 4. Find middle node
+    # 4.to Find middle node Uses two pointers: slow moves one node at a time, 
+    # while fast moves two nodes at a time. When fast reaches the end, slow is at the middle.
     def find_middle(self):
         slow = self.head
         fast = self.head
@@ -52,7 +67,7 @@ class LinkedList:
         if slow:
             print("Middle node:", slow.data)
 
-    # 5. Delete node by value
+    # 5.to Delete node by value Changes the previous node's next pointer to skip the node being deleted.
     def delete(self, key):
         temp = self.head
         if temp and temp.data == key:
@@ -65,7 +80,8 @@ class LinkedList:
         if temp:
             prev.next = temp.next
 
-    # 6. Reverse list
+    # 6.to Reverse list 
+    # Reverses each link using three pointers: prev, current, and nxt
     def reverse(self):
         prev = None
         current = self.head
@@ -85,12 +101,12 @@ class LinkedList:
             temp = temp.next.next
 
 
-# Usage Example
+# Example
 ll = LinkedList()
-ll.append(10)
-ll.append(20)
-ll.append(30)
-ll.append(40)
+ll.append(50)
+ll.append(18)
+ll.append(26)
+ll.append(78)
 ll.append(50)
 
 print("Original list:")
@@ -112,47 +128,3 @@ ll.sum_pairs()            # sum of consecutive pairs
 
 
 
-"""
-class Node:
-    def __init__ (self,data):
-        self.data=next #stores value of next
-        self.next=none #pointer to next node
-
-#to create a linkedlist class
-class LinkedList:
-    def __init__(self):
-        self.head=none #to start empty
-
-        #to append node at end 
-        def append(self,data):
-            new_node=node(data)
-            if not self.head:
-                self.head = new_node
-                return
-            temp=self.head
-            while temp.next:
-                temp=temp.next
-            temp.next=new_node
-
-
-    def print_linkedlist(self):
-        temp=self.head
-        while temp:
-            print(temp.data,end=" ")
-            temp=temp.next
-        print(None)
-
-    
-    def insert_linkedlist(self,data,pos):
-        new_node = Node(data)
-        if pos ==1:
-            new_node.next=self.head
-
-    
-
-
-
-
-
-
-"""
