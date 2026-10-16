@@ -1,4 +1,4 @@
-#finding middle node and deleting it
+#finding the middle node 
 
 
 class Node:

@@ -1,5 +1,4 @@
-#singly linear linked list - insert function
-#09-10-26
+#singly linear linked list - 
 class Node:
     def __init__(self, value):
         self.data = value
