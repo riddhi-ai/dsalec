@@ -1,4 +1,5 @@
-# reverse queue using stack
+# Reverse queue using stack and reverse stack using queue
+
 class Node:
     def __init__(self, value):
         self.data = value
@@ -6,8 +7,6 @@ class Node:
 
 
 class Stack:
-    #(push print)
-    
     def __init__(self):
         self.top = None
 
@@ -79,6 +78,19 @@ def reverse_queue(q1):
         q1.enqueue(st1.pop())
 
 
+def reverse_stack(st1):
+    q1 = LQueue()
+
+    # Move stack values into queue
+    while st1.top is not None:
+        q1.enqueue(st1.pop())
+
+    # Move queue values back into stack
+    while q1.front is not None:
+        st1.push(q1.dequeue())
+
+
+# Reverse a queue
 que = LQueue()
 que.enqueue(15)
 que.enqueue(67)
@@ -90,6 +102,23 @@ print("Original queue:")
 que.display()
 
 reverse_queue(que)
+
 print("Reversed queue:")
 que.display()
 
+
+# Reverse a stack
+st = Stack()
+st.push(15)
+st.push(67)
+st.push(55)
+st.push(100)
+st.push(88)
+
+print("Original stack:")
+st.display()
+
+reverse_stack(st)
+
+print("Reversed stack:")
+st.display()
