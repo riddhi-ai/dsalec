@@ -1,4 +1,5 @@
 # Reverse queue using stack and reverse stack using queue
+# reverse stack using queue, reverse queue using stack
 
 class Node:
     def __init__(self,value):
