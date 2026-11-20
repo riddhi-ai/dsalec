@@ -1,0 +1,6 @@
+Binary Search Tree
+
+properties:
+
+all values in the left subtree < parent
+all values in the right subtree >= parent
