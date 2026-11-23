@@ -14,5 +14,5 @@ inorder- left subtree first -> root -> right subtree (root in between) ---> give
 preorder - (root first)  root -> left subtree -> right subtree
 27,14,10,-3,19,15,35,31,42,55,50,92
 
-postorder - (root last) left subtree -> right subtree -->root
-
+postorder - (root last) left subtree -> right subtree ->root
+-3,10,15,19,14,31,50,92,55,42,35,27

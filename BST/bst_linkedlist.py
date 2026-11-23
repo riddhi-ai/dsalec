@@ -1,84 +1,110 @@
+#recursive code
 class Node:
     def __init__(self, data):
         self.data = data
         self.left = None
         self.right = None
 
-def insert(root, data):
-    if root is None:
-        return Node(data)
 
-    if data < root.data:
-        root.left = insert(root.left, data)
-    elif data > root.data:
-        root.right = insert(root.right, data)
+class BST:
+    def __init__(self):
+        self.root = None
 
-    return root
+    def insert(self, node):
+        self.root = self._insert(self.root, node)
 
-def del_node(self,rt, value):
-    if rt is None:
-        return rt
-    if value < rt.data:   #left subtree
-        rt.left = self.del_node(rt.left,value)
-    elif value>=rt.data:    #right subtree
-        rt.right=self.del_node(rt.right,value)
-    else:
-        if rt.left is None:
-            return rt.right
-        if rt.right is None:
-            return rt.left
-        
-    #when node has both left and right child
-    succ=self.get_successor(rt)
-    rt.data = succ.data
-    rt.right = self.del_node(rt.right,succ.data)
-    return rt
-    
+    def _insert(self, root, node):
+        if root is None:
+            return node
+
+        if node.data < root.data:
+            root.left = self._insert(root.left, node)
+        elif node.data > root.data:
+            root.right = self._insert(root.right, node)
+
+        return root
+
+    def get_successor(self, root):
+        # Find the smallest node in the right subtree.
+        successor = root.right
+        while successor.left is not None:
+            successor = successor.left
+        return successor
+
+    def del_node(self, root, value):
+        self.root = self._delete(root, value)
+
+    def _delete(self, root, value):
+        if root is None:
+            return None
+
+        if value < root.data:
+            root.left = self._delete(root.left, value)
+        elif value > root.data:
+            root.right = self._delete(root.right, value)
+        else:
+            # Zero or one child
+            if root.left is None:
+                return root.right
+            if root.right is None:
+                return root.left
+
+            # Two children
+            successor = self.get_successor(root)
+            root.data = successor.data
+            root.right = self._delete(root.right, successor.data)
+
+        return root
+
+    # Left → Root → Right
+    def inorder(self, root):
+        if root is None:
+            return
+
+        self.inorder(root.left)
+        print(root.data, end=" ")
+        self.inorder(root.right)
+
+    # Root → Left → Right
+    def preorder(self, root):
+        if root is None:
+            return
+
+        print(root.data, end=" ")
+        self.preorder(root.left)
+        self.preorder(root.right)
+
+    # Left → Right → Root
+    def postorder(self, root):
+        if root is None:
+            return
+
+        self.postorder(root.left)
+        self.postorder(root.right)
+        print(root.data, end=" ")
 
 
-# Left → Root → Right
-def inorder(root):
-    if root is None:
-        return
+b1 = BST()
+b1.insert(Node(100))
+b1.insert(Node(10))
+b1.insert(Node(450))
+b1.insert(Node(4))
+b1.insert(Node(65))
+b1.insert(Node(300))
+b1.insert(Node(500))
+b1.insert(Node(50))
 
-    inorder(root.left)
-    print(root.data, end=" ")
-    inorder(root.right)
+print("Inorder:")
+b1.inorder(b1.root)
 
+print("\nPreorder:")
+b1.preorder(b1.root)
 
-# Root → Left → Right
-def preorder(root):
-    if root is None:
-        return
+print("\nPostorder:")
+b1.postorder(b1.root)
 
-    print(root.data, end=" ")
-    preorder(root.left)
-    preorder(root.right)
-
-
-# Left → Right → Root
-def postorder(root):
-    if root is None:
-        return
-
-    postorder(root.left)
-    postorder(root.right)
-    print(root.data, end=" ")
-
-
-# Build the BST
-root = None
-for value in [50, 30, 70, 20, 40, 60, 80]:
-    root = insert(root, value)
-
-print("Inorder:", end=" ")
-inorder(root)
+b1.del_node(b1.root, 4)
+print("\nAfter Deletion:")
+b1.inorder(b1.root)
 print()
 
-print("Preorder:", end=" ")
-preorder(root)
-print()
-
-print("Postorder:", end=" ")
-postorder(root)
-print()
