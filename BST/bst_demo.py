@@ -1,4 +1,5 @@
 # insert, traversal ,delete node, min max ,search (key),level-order-traversal, count leaf nodes , count non-leaf node
+#count no. of nodes in left/right subtree , count total number of nodes
 #recursive code
 
 class Node:
@@ -119,6 +120,14 @@ class BST:
             temp = temp.right
         print("Max:", temp.data)
 
+    # def count_nodes(root):
+    #     if root is None:
+    #         return 0
+    #     return 1 + count_nodes(root.left) + count_nodes(root.right)
+
+
+    #         left_count = count_nodes(root.left) if root is not None else 0
+    #         print("Number of nodes in the left subtree:", left_count)
 
 b1 = BST()
 b1.insert(Node(100))
