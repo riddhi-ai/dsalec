@@ -1,4 +1,6 @@
+# insert, traversal ,delete node, min max ,search (key),level-order-traversal
 #recursive code
+
 class Node:
     def __init__(self, data):
         self.data = data
@@ -9,6 +11,7 @@ class Node:
 class BST:
     def __init__(self):
         self.root = None
+        self.count=0
 
     def insert(self, node):
         self.root = self._insert(self.root, node)
@@ -44,12 +47,12 @@ class BST:
             root.right = self._delete(root.right, value)
         else:
             # Zero or one child
-            if root.left is None:
+            if root.left is None:           #node with right child only
                 return root.right
-            if root.right is None:
+            if root.right is None:          #node with left child only
                 return root.left
 
-            # Two children
+            # Two children - Node has both left and right child
             successor = self.get_successor(root)
             root.data = successor.data
             root.right = self._delete(root.right, successor.data)
@@ -62,8 +65,11 @@ class BST:
             return
 
         self.inorder(root.left)
+        if root.left is None and root.right is None:
+                    self.count+=1
         print(root.data, end=" ")
         self.inorder(root.right)
+       
 
     # Root → Left → Right
     def preorder(self, root):
@@ -82,6 +88,24 @@ class BST:
         self.postorder(root.left)
         self.postorder(root.right)
         print(root.data, end=" ")
+
+
+    def search (self,key):
+        temp= self.root
+        while temp:
+            if temp.data == key:
+                return True
+            elif key <temp.data:
+                temp=temp.left
+            else:
+                temp=temp.right
+        return False
+
+    # def find_minmax(self,root):
+    #     temp=root
+    #     while temp.left:
+    #         temp=temp.left
+
 
 
 b1 = BST()
@@ -107,4 +131,17 @@ b1.del_node(b1.root, 4)
 print("\nAfter Deletion:")
 b1.inorder(b1.root)
 print()
+
+print("\n Total Number of Leaf Nodes:", b1.count) 
+
+if b1.search(50):
+    print("\n Found the node")
+else :
+    print("\n NOT found")
+
+
+if b1.search(150):
+    print("\n Found the node")
+else :
+    print("\n Node not found")
 
